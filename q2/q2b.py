@@ -1,4 +1,5 @@
 import copy
+from itertools import product
 
 
 def E(num):
@@ -64,15 +65,15 @@ def process_desc(desc, start):
                 array = array[:paremStart] + array[i:]
 #                 print("recusion", array)
 #                 print(type(paremStart), paremStart)
-#                 print("TEMPARRAY AAAAAAA", temparray, temparray[paremStart+1:i-1], array)
+                print("TEMPARRAY AAAAAAA", temparray, temparray[paremStart+1:i-1], array)
                 value = process_desc(temparray[paremStart+1:i], False)
                 array.insert(paremStart, value)
-#     print(array, "\n", desc)
+    print(array, "\n", desc)
     for i, letter in enumerate(array):
         if letter == "(":
             return process_desc(array, False)
     while len(array) > 1:
-#         print(f"array is {array}")
+        print(f"array is {array}")
         fun1, fun2 = array.pop(0), array.pop(0)
         if fun1 != ")" and fun2 != ")":
             array.insert(0, combine(fun1, fun2))
@@ -83,10 +84,37 @@ def process_desc(desc, start):
     return array[0]
 
 
-processed = process_desc(desc, True)
+# processed = process_desc(desc, True)
 # print(processed)
-print(processed(int(n)))
+# print(processed(int(n)))
 
+# func = combine(T, T)
+# print([func(x) for x in range(10000)])
+
+bigset = {}
+count = 0
+for i in product("EOT", repeat = 4):
+    func = process_desc("".join(i), True)
+    arr = []
+    added = False
+    for x in range(100000):
+        value = func(x)
+        arr.append(value)
+        if value == 99:
+            added = True
+    bigset[tuple(arr)] = added
+# print(len(bigset))
+
+# count = 0
+#
+# for j in bigset:
+#     if 99 in j:
+#         count += 1
+#
+for j in bigset.keys():
+    if j:
+        count += 1
+print(count)
 # print(type(test))
 #
 # print(test(3))

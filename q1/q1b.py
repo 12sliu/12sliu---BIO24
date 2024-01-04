@@ -9,7 +9,7 @@ n, i = int(n), int(i)
 #     bigstring = bigstring + str(n)
 #     n += 1
 #
-# print(bigstring[i-1])
+# print(str(bigstring[:101]).count("5"))
 
 length = len(str(n))
 num = "1"
@@ -46,7 +46,7 @@ count += num
 # print(i, len(str(count)), length, count)
 # print(i-(length-len(str(count)))-1)
 # print(str(count)[0])
-print(str(count)[i-(length-len(str(count)))-1])
+print()
 
 
 
